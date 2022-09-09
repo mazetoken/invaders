@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8"> 
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="Blockchain Invaders on Dogechain">
+      <meta name="web" content="">
+	   <link rel="icon" type="image/ico" sizes="32x32" href="img/favicon.ico">
+      <title>Blockchain Invaders</title>
+      <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/web3@1.7.4/dist/web3.min.js" integrity="sha256-s0r7SerqkXLFvbOMehiv7rJ/mbZWe3LxKhCJrBAEvas=" crossorigin="anonymous"></script>
+      <style>
+         body {
+            padding: 8px;
+            background-color: black;
+            color: whitesmoke;
+            transition: margin-left .5s;
+            font-size: 18px;
+            font-family: monospace, sans-serif;
+            text-align: center;
+            
+         }
+         a:link {
+            color: #4CAF50;
+            background-color: transparent;
+            text-decoration: none;
+            }
+
+            a:visited {
+            color: #4CAF50;
+            background-color: transparent;
+            text-decoration: none;
+            }
+
+            a:hover {
+            color: darkgray;
+            background-color: transparent;
+            text-decoration: underline;
+            }
+
+            a:active {
+            color: #4CAF50;
+            background-color: transparent;
+            text-decoration: underline;
+         }
+         .dark-mode {
+            background-color: whitesmoke;
+            color: black;
+         }
+         .button {
+            border: none;
+            color: white;
+            padding: 10px 26px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            font-family: monospace, sans-serif;
+         }
+
+         .button1 {background-color: #4CAF50;} /* Green */
+
+         @media screen and (max-width: 512px) {
+            .sidenav {padding-top: 15px;}
+            .sidenav a {font-size: 18px;}
+         }
+      </style>
+   </head>
+   <body>
+      <div style="font-size: 26px;">
+         <h1>BLOCKCHAIN INVADERS</h1>
+         <img src="img/invaders.png" alt="invaders logo" width="256">
+      </div>
+      <br>
+
+      <div>
+         <h2>on</h2>
+         <img src="img/dogechain.png" alt="Dogechain logo" width="90">
+         <p style="font-size: 16px;">Contract (verified):<br><a href="https://explorer.dogmoney.money/address/0xb58904a0328abACf05b288E51a578471A8317B70/transactions">0xb58904a0328abACf05b288E51a578471A8317B70</a></p>
+         <p>INVADERS is a satire on "moon investors", "airdrop hunters" and other brainiacs ;-)<br>Read <a href="#FAQ">FAQ</a></p>
+      </div>
+      <br>
+
+      <div>
+         <h2>INVADERS FAUCET</h2>
+         <p>Get 1000 INVADERS every hour<br>
+            Tx fee is about 0.05 WDOGE<br>
+            Faucet supply: 10 million</p>
+         <br>
+         <button onclick="connect()" class="button button1">Connect MetaMask</button>
+         <p></p>
+         <br>
+         <button onclick="claimTokens()" class="button button1">Claim</button>
+         <p></p>
+         <div id="lang1"></div>
+         <br>
+         <button onclick="lockTimeI()" class="button button1">Check next claim date</button><br>
+         Seriously! Don`t claim earlier
+         <p></p>
+         <div id="lang2"></div>
+         <br>
+         <button onclick="balanceFaucet()" class="button button1">Faucet balance</button>
+         <p></p>
+         <div id="lang3"></div>
+         <br>
+         <button onclick="addIcon()" class="button button1">Add INVADERS (with icon) to MetaMask</button>
+         <p></p>
+         <br>
+         Trade on <a href="https://app.dogmoney.money/swap?inputCurrency=&outputCurrency=0xb58904a0328abACf05b288E51a578471A8317B70">DogMoney DEX</a><br><br>
+         Check <a href="https://dispersedoge.netlify.app">Disperse App</a><br>
+         and <a href="https://bookofdog.doge.wf">The Book of Dog</a> a blockchain guestbook<br>
+      </div>
+      <br><br>
+
+      <div id="FAQ">
+         <p style="font-size: 16px;">FAQ:<br>
+            Q: Should I invest in this project?<br>
+            A: Nope. Never! There should not be expectation of profit.<br>
+            Q: Do BLOCKCHAIN INVADERS have any usecase?<br>
+            A: No. It is useless s..t token. INVADERS come from darkness.<br>
+            Q: What about DEX liquidity?<br>
+            A: You can add too ;-)<br>
+            Q: Was there a pre-sale or initial offering?<br>
+            A: No.<br>
+            Q: What about tokens distribution?<br>
+            A: Airdrops, faucet, staking rewards, giveaways, no promises.<br>
+            Q: Ok, but is it safe if I want to try it?<br>
+            A: The contract is verified. DYOR.<br>
+            Q: Why was I redirected to Github?<br>
+            A: Invaders refuse to buy a TLD. They use <a href="https://app.dogedomains.wf/name/invaders.doge/details">.doge domains</a>.
+         </p>
+      </div>
+      <br><br>
+
+      <div id="FAQ">
+         <p style="font-size: 16px;">
+            <p><a href="https://t.me/mazetokens"><img src="img/telegram.png" alt="Telegram" width="32"></a> <a href="https://github.com/mazetoken/invaders"><img src="img/github.png" alt="Github" width="32"></a>
+         </p>
+
+      <script>
+         web3 = new Web3(window.ethereum);
+         ethereum.request({ method: 'eth_requestAccounts' });
+         var zombieMaster;
+         const getAccount = async () => {
+         try {
+         const myAccounts = await web3.eth.getAccounts();
+         zombieMaster = myAccounts[0];
+         console.log("Master account" + zombieMaster);
+         return myAccounts[0];
+         } catch (err) {
+               console.log(err);
+         }
+         }
+         getAccount();
+         web3.eth.defaultAccount = web3.eth.accounts[0];
+      </script>
+
+      <script src="contractBlockchainInvaders.js"></script>
+
+      <script>
+         function connect() {
+            location.reload();
+         }
+      </script>
+
+      <script>
+         function claimTokens() {
+            var content = "Sending transaction from: ";
+            content += zombieMaster;
+            $("#lang1").html(content);
+            var event = contractBlockchainInvaders.methods.claimToken(zombieMaster).send({ from: zombieMaster, value: 50000000000000000 })
+               .then(function (receipt) {
+                     console.log(receipt);
+            var content = "Transaction sent!: ";
+            content += JSON.stringify(receipt.transactionHash);
+            $("#lang1").html(content);
+               });;
+         };
+
+         function lockTimeI() {
+            var event = contractBlockchainInvaders.methods.lockTime(zombieMaster).call()
+               .then(function (result) {
+            var content = "Next claim on: ";
+                     console.log(result);
+            var a = new Date(result * 1000);
+            var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+            var year = a.getFullYear();
+            var month = months[a.getMonth()];
+            var date = a.getDate();
+            var hour = a.getHours();
+            var min = a.getMinutes();
+            var sec = a.getSeconds();
+            var time = month + ' ' + date + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+                     console.log(time);
+            content += JSON.stringify(time.toString());
+            $("#lang2").html(content);
+               });;
+         };
+
+         function balanceFaucet() {
+            var event = contractBlockchainInvaders.methods.balanceOf("0xb58904a0328abACf05b288E51a578471A8317B70").call()
+               .then(function (result) {
+            var content = "Faucet balance: ";
+               console.log(result/1000000000000000000);
+            content += JSON.stringify(result.toString()/1000000000000000000);
+            $("#lang3").html(content);
+               });;
+         };
+      </script>
+
+      <script>
+         function addIcon() {
+            web3 = new Web3(window.ethereum);
+            const tokenAddress = '0xb58904a0328abacf05b288e51a578471a8317b70';
+            const tokenSymbol = 'INVADERS';
+            const tokenDecimals = 18;
+            const tokenImage = 'https://bafkreibrq2d2b6lak57uwzrqcgrlqmalhkcuna3fyaj2o5r5x5vwe3l6o4.ipfs.nftstorage.link/';
+            ethereum.request({
+               method: 'wallet_watchAsset',
+               params: {
+               type: 'ERC20',
+               options: {
+                  address: tokenAddress,
+                  symbol: tokenSymbol,
+                  decimals: tokenDecimals,
+                  image: tokenImage,
+               },
+               },
+            });
+         };
+      </script>
+  </body>
+</html>
