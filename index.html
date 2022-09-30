@@ -7,8 +7,8 @@
       <meta name="web" content="">
 	   <link rel="icon" type="image/ico" sizes="32x32" href="img/favicon.ico">
       <title>Blockchain Invaders</title>
-      <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-      <script src="https://cdn.jsdelivr.net/npm/web3@1.7.4/dist/web3.min.js" integrity="sha256-s0r7SerqkXLFvbOMehiv7rJ/mbZWe3LxKhCJrBAEvas=" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/web3@1.8.0/dist/web3.min.js" integrity="sha256-1TLx50r3wQ52OlAm5jSfpTwbN9MJ51NysfLmsXmUPDk=" crossorigin="anonymous"></script>
       <style>
          body {
             padding: 8px;
@@ -49,7 +49,7 @@
          }
          .button {
             border: none;
-            color: white;
+            color: black;
             padding: 10px 26px;
             text-align: center;
             text-decoration: none;
@@ -60,7 +60,7 @@
             font-family: monospace, sans-serif;
          }
 
-         .button1 {background-color: #4CAF50;} /* Green */
+         .button1 {background-color: darkgray;}
 
          @media screen and (max-width: 512px) {
             .sidenav {padding-top: 15px;}
@@ -73,6 +73,7 @@
          <h1>BLOCKCHAIN INVADERS</h1>
          <img src="img/invaders.png" alt="invaders logo" width="256">
       </div>
+      <p><i>Satire and a token of appreciation</i></p>
       <br>
 
       <div>
@@ -83,16 +84,14 @@
             <a href="https://explorer.dogechain.dog/address/0xb58904a0328abACf05b288E51a578471A8317B70/contracts">0xb58904a0328abACf05b288E51a578471A8317B70</a><br>
             <a href="https://explorer.dogmoney.money/address/0xb58904a0328abACf05b288E51a578471A8317B70/contracts">0xb58904a0328abACf05b288E51a578471A8317B70</a><br>
          </p>
-         <p>INVADERS is a satirical token<br>Read <a href="#FAQ">FAQ</a><br>
-            It is a satire on "moon investors" and "airdrop hunters" ;-)
-         </p>
+         <p>Read <a href="#FAQ">FAQ</a></p>
       </div>
       <br>
 
       <div>
          <h2>INVADERS FAUCET</h2>
-         <p>Get 1000 INVADERS every hour<br>
-            Tx fee is about 0.05 WDOGE<br>
+         <p>Get 100 INVADERS every hour<br>
+            Tx fee is about 0.005 WDOGE<br>
             Faucet supply: 10 million</p>
          <br>
          <button onclick="connect()" class="button button1">Connect MetaMask</button>
@@ -119,17 +118,16 @@
          <br>
          INVADERS on <a href="https://app.dogmoney.money/swap?inputCurrency=&outputCurrency=0xb58904a0328abACf05b288E51a578471A8317B70">DogMoney DEX</a> <img src="img/dogmoney.png" alt="DogMoney logo" width="56"><br>
          <br>
+         <p style="font-size: 16px;"><i>Add contract - 0xb58904a0328abACf05b288E51a578471A8317B70 - manually</i></p>
+         <br>
          Dex Screener <a href="https://dexscreener.com/dogechain">Dogechain</a> - YodeSwap and QuickSwap<br>
          Dex Screener <a href="https://dexscreener.com/dogechain/0xfc824e3a631a19d051caf2745f3c8f94ffd950be">Dogechain</a> - DogMoney<br>
-         <br><br>
-         Check <a href="https://bookofdog.doge.wf">The Book of Dog</a> a blockchain guestbook<br>Stake BODO <img src="img/bodo.png" alt="BODO logo" width="56">and receive INVADERS<br><br>
-         <br>
-         Check RENDERAI NFT <a href="https://renderai.art">Collection</a><br><br><img src="img/renderainft.png" alt="RENDERAI image" width="512">
       </div>
       <br><br>
 
       <div id="FAQ">
-         <p style="font-size: 16px;">FAQ:<br>
+         <p style="font-size: 16px;">FAQ:<br><br>
+            <i>BLOCKCHAIN INVADERS is a satire on "moon investors" and "airdrop hunters" ;-)</i><br><br>
             Q: Should I invest in Blockchain Invaders project?<br>
             A: Nope. Never! There should not be expectation of profit.<br>
             Q: Do BLOCKCHAIN INVADERS have any usecase?<br>
@@ -150,10 +148,20 @@
       </div>
       <br><br>
 
-      <div id="FAQ">
+      <div>
+         <p>Check other projects:</p>
+         <a href="https://bookofdog.doge.wf">The Book of Dog</a> a blockchain guestbook<br>Stake BODO <img src="img/bodo.png" alt="BODO logo" width="56">and receive INVADERS<br><br>
+         <br>
+         RENDERAI NFT <a href="https://renderai.art">Collection</a> <img src="img/renderai.png" alt="RENDERAI image" width="56">
+      </div>
+      <br><br>
+
+      <div>
          <p style="font-size: 16px;">
             <p><a href="https://t.me/mazetokens"><img src="img/telegram.png" alt="Telegram" width="32"></a> <a href="https://github.com/mazetoken/invaders"><img src="img/github.png" alt="Github" width="32"></a>
          </p>
+      </div>
+      <br><br>
 
       <script>
          web3 = new Web3(window.ethereum);
@@ -186,7 +194,7 @@
             var content = "Sending transaction from: ";
             content += zombieMaster;
             $("#lang1").html(content);
-            var event = contractBlockchainInvaders.methods.claimToken(zombieMaster).send({ from: zombieMaster, value: 50000000000000000 })
+            var event = contractBlockchainInvaders.methods.claimToken(zombieMaster).send({ from: zombieMaster, value: 5000000000000000 })
                .then(function (receipt) {
                      console.log(receipt);
             var content = "Transaction sent!: ";
