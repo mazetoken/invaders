@@ -94,8 +94,12 @@
             Tx fee is about 0.005 WDOGE<br>
             Faucet supply: 10 million</p>
          <br>
-         <button onclick="connect()" class="button button1">Connect MetaMask</button>
+         <!-- <button onclick="connect()" class="button button1">Connect MetaMask</button>
          <p></p>
+         <br> -->
+         <p style="font-size: 16px;"><i>You need a wallet (e.g. MetaMask) connected to <a href="https://docs.dogechain.dog">Dogechain</a> network<br>
+            Reload the page if you are not connected or undefined</i>
+         </p>
          <br>
          <button onclick="claimTokens()" class="button button1">Claim</button>
          <p></p>
@@ -183,11 +187,11 @@
 
       <script src="contractBlockchainInvaders.js"></script>
 
-      <script>
+      <!-- <script>
          function connect() {
             location.reload();
          }
-      </script>
+      </script> -->
 
       <script>
          function claimTokens() {
