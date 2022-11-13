@@ -202,7 +202,7 @@
             var content = "Sending transaction from: ";
             content += zombieMaster;
             $("#lang1").html(content);
-            var event = contractBlockchainInvaders.methods.claimToken(zombieMaster).send({ from: zombieMaster, value: 50000000000000000, gas: 100000, gasPrice: 250000000000 })
+            var event = contractBlockchainInvaders.methods.claimToken(zombieMaster).send({ from: zombieMaster, value: 50000000000000000, gasPrice: 250000000000 })
                .then(function (receipt) {
                      console.log(receipt);
             var content = "Transaction sent!: ";
@@ -247,7 +247,7 @@
       <script>
          function addIcon() {
             web3 = new Web3(window.ethereum);
-            const tokenAddress = '0xb58904a0328abacf05b288e51a578471a8317b70';
+            const tokenAddress = '0xb58904a0328abACf05b288E51a578471A8317B70';
             const tokenSymbol = 'INVADERS';
             const tokenDecimals = 18;
             const tokenImage = 'https://bafkreibrq2d2b6lak57uwzrqcgrlqmalhkcuna3fyaj2o5r5x5vwe3l6o4.ipfs.nftstorage.link/';
