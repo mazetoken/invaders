@@ -93,7 +93,7 @@
       <div>
          <h2>INVADERS "SELF-DISTRIBUTION FACTORY"</h2>
          <p>Claim 1000 INVADERS <img src="img/invaders.png" alt="invaders logo" width="56"> every hour<br>
-            Transaction cost is about 0.05 WDOGE<br>
+            Transaction cost is about 0.06 WDOGE<br>
             Factory supply: 10 million to distribute</p>
          <br>
          <!-- <button onclick="connect()" class="button button1">Connect MetaMask</button>
@@ -202,7 +202,7 @@
             var content = "Sending transaction from: ";
             content += zombieMaster;
             $("#lang1").html(content);
-            var event = contractBlockchainInvaders.methods.claimToken(zombieMaster).send({ from: zombieMaster, value: 50000000000000000 })
+            var event = contractBlockchainInvaders.methods.claimToken(zombieMaster).send({ from: zombieMaster, value: 50000000000000000, gas: 100000, gasPrice: 250000000000 })
                .then(function (receipt) {
                      console.log(receipt);
             var content = "Transaction sent!: ";
@@ -212,6 +212,8 @@
          };
 
          function lockTimeI() {
+            var content = "Reload if undefined";
+            content += zombieMaster;
             var event = contractBlockchainInvaders.methods.lockTime(zombieMaster).call()
                .then(function (result) {
             var content = "Next claim on: ";
