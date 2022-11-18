@@ -7,8 +7,6 @@
       <meta name="web" content="">
 	   <link rel="icon" type="image/ico" sizes="32x32" href="img/favicon.ico">
       <title>Blockchain Invaders</title>
-      <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-      <script src="https://cdn.jsdelivr.net/npm/web3@1.8.0/dist/web3.min.js" integrity="sha256-1TLx50r3wQ52OlAm5jSfpTwbN9MJ51NysfLmsXmUPDk=" crossorigin="anonymous"></script> -->
       <script src="web3.min.js"></script>
       <script src="jquery.min.js"></script>
       <style>
@@ -93,29 +91,31 @@
       <div>
          <h2>INVADERS "SELF-DISTRIBUTION FACTORY"</h2>
          <p>Claim 1000 INVADERS <img src="img/invaders.png" alt="invaders logo" width="56"> every hour<br>
-            Transaction cost is about 0.06 WDOGE<br>
+            Transaction cost is about 0.07 WDOGE<br>
             Factory supply: 10 million to distribute</p>
          <br>
-         <!-- <button onclick="connect()" class="button button1">Connect MetaMask</button>
-         <p></p>
-         <br> -->
-         <p style="font-size: 16px;"><i>You need a wallet (e.g. MetaMask) connected to <a href="https://docs.dogechain.dog">Dogechain</a> network<br>
-            Reload the page if you are not connected or undefined</i>
-         </p>
+         <p>You need a wallet (e.g. MetaMask) connected to <a href="https://docs.dogechain.dog">Dogechain</a> network</p>
          <br>
-         <button onclick="claimTokens()" class="button button1">Claim INVADERS</button>
-         <p></p>
-         <div id="lang1"></div>
+         <button id="connect" class="button button1">Connect wallet</button>
+         <p style="font-size: 16px;">Connected to: <span id="wallet-address"></span></p>
          <br>
-         <button onclick="lockTimeI()" class="button button1">Check next claim date</button><br>
+         
+         <button id="claimTokens" class="button button1">Claim INVADERS</button>
+         <p></p>
+         <!-- <div id="lang1"></div> -->
+         <br>
+         
+         <button id="lockTimeI" class="button button1">Check next claim date</button><br>
          <p></p>
          <div id="lang2"></div>
          <br>
-         <button onclick="balanceFaucet()" class="button button1">Factory balance</button>
+         
+         <button id="balanceFaucet" class="button button1">Factory balance</button>
          <p></p>
          <div id="lang3"></div>
          <br>
-         <button onclick="addIcon()" class="button button1">Add INVADERS (with icon) to MetaMask</button>
+         
+         <button id="addIcon" class="button button1">Add INVADERS (with icon) to MetaMask</button>
          <p></p>
          <br><br>
          INVADERS on <a href="https://app.yodeswap.dog/exchange/swap?inputCurrency=&outputCurrency=0xb58904a0328abACf05b288E51a578471A8317B70">YodeSwap DEX</a> <img src="img/yodeswap.png" alt="YodeSwap logo" width="56"><br>
@@ -124,7 +124,7 @@
          <br>
          INVADERS on <a href="https://app.dogmoney.money/swap?inputCurrency=&outputCurrency=0xb58904a0328abACf05b288E51a578471A8317B70">DogMoney DEX</a> <img src="img/dogmoney.png" alt="DogMoney logo" width="56"><br>
          <br>
-         <p style="font-size: 16px;"><i>You may need to manually add INVADERS contract address (0xb58904a0328abACf05b288E51a578471A8317B70)</i></p>
+         <p style="font-size: 16px;"><i>You may need to manually add INVADERS contract address: 0xb58904a0328abACf05b288E51a578471A8317B70</i></p>
          <br>
          Dex Screener <a href="https://dexscreener.com/dogechain">Dogechain</a> - YodeSwap and QuickSwap<br>
          Dex Screener <a href="https://dexscreener.com/dogechain/0xfc824e3a631a19d051caf2745f3c8f94ffd950be">Dogechain</a> - DogMoney<br>
@@ -171,7 +171,78 @@
       </div>
       <br><br>
 
-      <script src="functions.js"></script>
-      <script src="contractBlockchainInvaders.js"></script>
-  </body>
+      <script type="text/javascript">
+         var account = null;
+         var contract = null;
+         const ADDRESS = "0xb58904a0328abACf05b288E51a578471A8317B70";
+
+         document.getElementById('connect').onclick = async () => {
+            if (window.ethereum) {
+               await window.ethereum.send('eth_requestAccounts');
+               //await ethereum.request({ method: 'eth_requestAccounts' });
+               window.web3 = new Web3(window.ethereum);
+               var accounts = await web3.eth.getAccounts();
+               //var accounts = await ethereum.request({ method: 'eth_accounts' });
+               account = accounts[0];
+               document.getElementById('wallet-address').textContent = account;
+               contract = new web3.eth.Contract(BIabi, ADDRESS);
+
+               document.getElementById('claimTokens').onclick = async () => {
+                  contract.methods.claimToken(account).send({ from: account, value: 50000000000000000, gas: 80000, gasPrice: 250000000000 })
+               }
+
+               document.getElementById('lockTimeI').onclick = async () => {
+                  contract.methods.lockTime(account).call()
+                     .then(function (result) {
+                  var content = "Next claim on: ";
+                     console.log(result);
+                  var a = new Date(result * 1000);
+                  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                  var year = a.getFullYear();
+                  var month = months[a.getMonth()];
+                  var date = a.getDate();
+                  var hour = a.getHours();
+                  var min = a.getMinutes();
+                  var sec = a.getSeconds();
+                  var time = month + ' ' + date + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+                     console.log(time);
+                  content += JSON.stringify(time.toString());
+                  $("#lang2").html(content);
+                     });;
+               }
+
+               document.getElementById('balanceFaucet').onclick = async () => {
+                  //contract.methods.mint(tokenId, amount).send({ from: account, value: String(totalAmount)});
+                  contract.methods.balanceOf("0xb58904a0328abACf05b288E51a578471A8317B70").call()
+                     .then(function (result1) {
+                  var content = "";
+                     console.log(result1/1000000000000000000);
+                  content += JSON.stringify(result1.toString()/1000000000000000000);
+                  $("#lang3").html(content + " INVADERS");
+                     });;
+               }
+
+               document.getElementById('addIcon').onclick = async () => {
+                  const tokenAddress = '0xb58904a0328abACf05b288E51a578471A8317B70';
+                  const tokenSymbol = 'INVADERS';
+                  const tokenDecimals = 18;
+                  const tokenImage = 'https://bafkreibrq2d2b6lak57uwzrqcgrlqmalhkcuna3fyaj2o5r5x5vwe3l6o4.ipfs.nftstorage.link/';
+                  ethereum.request({
+                     method: 'wallet_watchAsset',
+                     params: {
+                     type: 'ERC20',
+                     options: {
+                        address: tokenAddress,
+                        symbol: tokenSymbol,
+                        decimals: tokenDecimals,
+                        image: tokenImage,
+                     },
+                     },
+                  });
+               }
+            }
+         }
+      </script>
+      <script src="BIabi.js"></script>
+   </body>
 </html>

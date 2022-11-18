@@ -1,5 +1,4 @@
-var contractBlockchainInvaders = new web3.eth.Contract(
-[
+const BIabi = [
 	{
 		"anonymous": false,
 		"inputs": [
@@ -584,4 +583,4 @@ var contractBlockchainInvaders = new web3.eth.Contract(
 		"stateMutability": "view",
 		"type": "function"
 	}
-], "0xb58904a0328abacf05b288e51a578471a8317b70");
+];
