@@ -86,13 +86,12 @@
          </p>
          <p>Read <a href="#FAQ">FAQ</a></p>
       </div>
-      <br>
 
       <div>
          <h2>INVADERS "SELF-DISTRIBUTION FACTORY"</h2>
-         <p>Claim 1000 INVADERS <img src="img/invaders.png" alt="invaders logo" width="56"> every hour<br>
-            Transaction cost is about 0.07 WDOGE<br>
-            Factory supply: 10 million to distribute</p>
+         <p>Claim 1000 INVADERS <img src="img/invaders.png" alt="invaders logo" width="56"> every hour.<br>
+            Transaction cost is about 0.06 WDOGE.
+         </p>
          <br>
          <p>You need a wallet (e.g. MetaMask) connected to <a href="https://docs.dogechain.dog">Dogechain</a> network</p>
          <br>
@@ -101,7 +100,7 @@
          <br>
          
          <button id="claimTokens" class="button button1">Claim INVADERS</button>
-         <p></p>
+         <p>Wait for confirmation</p>
          <!-- <div id="lang1"></div> -->
          <br>
          
@@ -166,7 +165,7 @@
 
       <div>
          <p style="font-size: 16px;">
-            <p><a href="https://t.me/mazetokens"><img src="img/telegram.png" alt="Telegram" width="32"></a> <a href="https://github.com/mazetoken/contracts"><img src="img/github.png" alt="Github" width="32"></a>
+            <p><a href="https://t.me/mazetokens"><img src="img/telegram.png" alt="Telegram" width="32"></a> <a href="https://github.com/mazetoken/contracts/tree/main/BlockchainInvaders"><img src="img/github.png" alt="Github" width="32"></a>
          </p>
       </div>
       <br><br>
@@ -188,7 +187,7 @@
                contract = new web3.eth.Contract(BIabi, ADDRESS);
 
                document.getElementById('claimTokens').onclick = async () => {
-                  contract.methods.claimToken(account).send({ from: account, value: 50000000000000000, gas: 80000, gasPrice: 250000000000 })
+                  contract.methods.claimToken(account).send({ from: account, value: 50000000000000000, gas: 60000, gasPrice: 250000000000 })
                }
 
                document.getElementById('lockTimeI').onclick = async () => {
