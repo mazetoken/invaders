@@ -1,7 +1,5 @@
 # BLOCKCHAIN INVADERS on [Dogechain](https://dogechain.dog)
 
-BLOCKCHAIN INVADERS is a satirical token and a faucet application on Dogechain
-
-The [faucet](https://invaders.doge.wf)
+[BLOCKCHAIN INVADERS](https://blockchaininvaders.netlify.app) is satire and a token of appreciation
 
 [Telegram](https://t.me/mazetokens]
