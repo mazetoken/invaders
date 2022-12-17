@@ -1,4 +1,4 @@
-const BIabi = [
+const BlockchainInvadersAbi = [
 	{
 		"anonymous": false,
 		"inputs": [
