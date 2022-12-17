@@ -182,7 +182,7 @@
                //var accounts = await ethereum.request({ method: 'eth_accounts' });
                account = accounts[0];
                document.getElementById('wallet-address').textContent = account;
-               contract = new web3.eth.Contract(BIabi, ADDRESS);
+               contract = new web3.eth.Contract(BlockchainInvadersAbi, ADDRESS);
 
                document.getElementById('claimTokens').onclick = async () => {
                   contract.methods.claimToken(account).send({ from: account, value: 50000000000000000, gas: 60000, gasPrice: 250000000000 })
